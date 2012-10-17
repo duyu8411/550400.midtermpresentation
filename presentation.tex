@@ -1,0 +1,203 @@
+\documentclass[compress,handout,10pt]{beamer}
+
+\newlength{\wideitemsep}
+\setlength{\wideitemsep}{\itemsep}
+\addtolength{\wideitemsep}{100pt}
+\let\olditem\item
+\renewcommand{\item}{\setlength{\itemsep}{0.5\baselineskip}\olditem}
+
+\usetheme{Singapore}
+\usecolortheme{lily}
+\usefonttheme[onlymath]{serif}
+
+\usepackage{natbib}
+\usepackage{float}
+\floatstyle{boxed}
+\usepackage{colortbl}
+\usepackage{mathpazo}
+\usepackage{graphicx}
+\usepackage{movie15}
+\usepackage{bm}
+\usepackage{verbatim}
+\usepackage{comment}
+\usepackage{caption}
+\usepackage{subcaption}
+\captionsetup[subfigure]{labelformat=empty}
+\captionsetup[figure]{labelformat=empty}
+
+\newcommand{\mygreen}{\color{green!50!black}}
+\newcommand{\myblue}{\color{blue}}
+\newcommand{\myred}{\color{red}}
+\newcommand{\mycolor}{\color{red}{c}\color{blue}{o}\color{green}{l}\color{orange}{o}\color{cyan}{r}}
+\newcommand{\mysize}{\scriptsize{s}\small{i}\normalsize{z}\Large{e}}
+\newcommand{\myshape}{\textcircled{s}\textit{h}\texttt{a}\textsf{p}\textsc{e}}
+
+\xdefinecolor{titlecolor}{rgb}{.855,.647,.125}
+\setbeamercolor{frametitle}{fg=titlecolor}
+\setbeamerfont{frametitle}{series=\bfseries}
+\setbeamercolor{normal text in math text}{parent=math text}
+
+\setbeamertemplate{navigation symbols}{} %gets rid of navigation symbols
+\setbeamertemplate{footline}[frame number]
+\beamertemplateshadingbackground{blue!5}{yellow!10}
+
+\title{{\color{blue} \LARGE Maternal Smoking and Infant Health\newline} }
+
+\subtitle{{\color{red} \large National Institutes of Health} }
+
+\author{ 
+%    \vspace{5pt}
+    {Yu Du} \\ 
+    \vspace{5pt}
+} 
+\institute{Johns Hopkins University}
+
+\date{\mygreen \today} 
+
+\begin{document}
+
+\begin{frame}[plain]
+    \titlepage
+\end{frame}
+
+\begin{frame}
+    \frametitle{Outline}
+    \tableofcontents
+\end{frame}
+
+\section{Background}
+
+\begin{frame}
+    \frametitle{Introduction to National Institutes of Health}
+    \vspace{7pt}
+             \begin{enumerate}
+                 \item Part of the U.S. Department of Health and Human Services
+                 \item Nation$'$s medical research agency
+                 \item Make important discoveries that improve health and save lives
+                 \item Thanks to NIH-funded medical research, Americans today are living longer and healthier 
+             \end{enumerate}
+\end{frame}
+
+\section{Problem Statement}
+\begin{frame}
+    \frametitle{Problem that concerns the baby birth weight}
+     \begin{enumerate}
+         \item One of the U.S. Surgeon General’s health warnings ``Smoking by pregnant women may result in fetal injury, premature birth, and low birth weight."
+         \item Epidemiological studies show that smoking is responsible for a 150 to 250 gram reduction in birth weight 
+         \item Epidemiological studies also indicate that smoking mothers are about twice as likely as nonsmoking mothers to have a low-birth-weight baby (under 2500 grams)
+
+     \end{enumerate}
+\end{frame}
+
+\begin{frame}
+    \frametitle{NIH-Sponsored Project}
+     \begin{enumerate}
+         \item To compare the birth weights of babies born to smokers and nonsmokers
+         \item To assess the impact of maternal smoking status on baby birth weight
+         \item To determine what other variables influence the baby birth weight
+         \item To predict the birth weight given the values of variables considered
+     \end{enumerate}
+\end{frame}
+
+\section{Deliverable}
+
+\begin{frame}
+    \frametitle{From Team to Sponsor}
+    The following outputs are expected from this project:
+     \begin{enumerate}
+         \item A report regarding whether maternal smoking status has an impact on baby birth weight
+         \item A software that produces the prediction interval of baby birth weight given the values of the predictors as the input
+     \end{enumerate}
+\end{frame}
+
+\begin{frame}
+    \frametitle{From Sponsor to Team}
+    In order for my project to be of successful one, I will need:
+     \begin{enumerate}
+         \item Access to the datasets of Child Health and Development Studies where the data regarding birth weight, maternal smoking status, maternal height, weight and age are provided
+         \item Computing resources
+         \item Timely responses to inquiries
+         \item Symposium attendance travel expenses
+     \end{enumerate}
+\end{frame}
+
+\section{Approach}
+\begin{frame}
+    \frametitle{Collection of Data}
+    The data was collected in the following ways:
+     \begin{enumerate}
+         \item Place: Kaiser Foundation Health Plan in the San Francisco–East Bayarea
+         \item Time: Between 1960 and 1967
+         \item Variable: Baby birth weight; Maternal smoking status; Maternal height; Maternal weight; Maternal age
+     \end{enumerate}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Clean the Data}
+     \begin{enumerate}
+     
+         \item Delete the data with missing values
+         \item Delete the detected outliers
+    
+     \end{enumerate}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Methods}
+     \begin{enumerate}
+         \item Software: R
+         \item Two sample hypothesis test to determine the difference in the birth weights of babies born to smoking mothers and babies born to nonsmoking mothers
+         \item Multiple covariates regression analysis for birth weight (response) against other variables including maternal smoking status, maternal height, weight, age as predictors to measure the relationship among those variables
+         \item Ordinary least squres method to find the coefficients
+         \item Test the model
+         \item Refine the model
+     \end{enumerate}
+\end{frame}
+
+\begin{frame}
+    \frametitle{MLR Model for baby birth weight}
+     Original Model:
+\[
+\begin{split}
+     Birth~Weight=~\beta_0 + \beta_1 (Maternal~Smoking~Status) + \beta_2 (Maternal~Height)\\+ \beta_3(Maternal~Weight) + \beta_4 (Maternal~Age)+ \epsilon(error~term)
+\end{split}
+\]
+%     One way to refine:
+%    \begin{align*}
+%      Premolt~Size = ~&\beta_0 + \beta_1 (Postmolt~Size) + \beta_2 (Type~of~Data)\\
+%               & + \beta_3 (Postmolt~Size)*(Type~of~Data)
+%  \end{align*}
+%     Another way to refine:
+%     \begin{align*}
+%      Premolt~Size = ~&\beta_0 + \beta_1 (Postmolt~Size) + \beta_1 (Postmolt~Size)^2\\
+%               & + \beta_3 (Type~of~Data).
+%     \end{align*}
+\end{frame}
+
+\section{Conclusion}
+\begin{frame}
+    \frametitle{Work to Be Done}
+     \begin{enumerate}
+         \item Assess residual assumptions
+         \item Examine the multicollinearity and overfitting
+         \item Test and refine the model
+     \end{enumerate}
+\end{frame}
+
+\begin{frame}
+    \frametitle{For Future Related Research}
+     \begin{enumerate}
+         \item Take into consideration more variables like the diet of mothers before they labored
+         \item Use future data to further test the model
+         
+     \end{enumerate}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Bibliography}
+    \frametitle{References}
+       \bibliographystyle{plain}
+       \nocite{*}
+      \bibliography{reference}
+\end{frame}
+
+\end{document}
